@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  version: '0.0.1'
+  title: 'Ludo API apple group'
+  description: 'All about ludo'
+paths: 
+  /ludo:
+    get:
+      description: List of available Ludo games
+      responses:
+        '200':
+          description: Successfully returned saved games
+    post:
+      description: Start Game
+      responses:
+        '200':
+          description: Successfully started game
+        '400':
+          description: Game unable to start
+  /ludo/{gameID}/players:
+    post:
+      description: Send information on how many players will play the game
+      parameters:
+      
+      type: integer
+      response:
+        '200':
+          description: Sends int value for how many players will be in the game
+
+
+  
+
