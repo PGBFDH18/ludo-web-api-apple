@@ -10,23 +10,105 @@ paths:
       responses:
         '200':
           description: Successfully returned saved games
+          content:
+            application/json:
+              schema:
+                type: array
+                items: string
+        '400':
+          description: No games found    
     post:
-      description: Start Game
+      description: Create Game
       responses:
         '200':
-          description: Successfully started game
+          description: Successfully created game (method BeginGame started)
         '400':
-          description: Game unable to start
-  /ludo/{gameID}/players:
+          description: Unable to create game
+          
+  /ludo/{gameID}:
+    get:
+      description: Detailed information about the game
+      responses:
+        '200':
+          description: Successfully returned detailed information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Pieces:
+                      type: array
+                    number:
+                      type: int
+        '400':
+          description: Unable to return detailed information
+    delete:
+      description: Delete a game
+      responses:
+        '200':
+          description: Successfully deleted a game
+        '400':
+          description: Could not delete a game
+    
+  /ludo/{gameID}/players:  
     post:
       description: Send information on how many players will play the game
       parameters:
-      
-      type: integer
-      response:
+      - name: gameID
+        in: path
+        type: integer
+      properties:
+        required: true
+      responses:
         '200':
-          description: Sends int value for how many players will be in the game
+          description: Successfully sent number of players
+        '400':
+          description: Could not send number of players
 
+  /ludo/{gameID}/players/{playerID}:
+    get:
+      description: Colors to chose from
+      parameters:
+      - name: playerID
+        in: path
+        type: integer
+      properties:
+        required: true
+      responses:
+        '200':
+          description: Successfully returned colors to choose from
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: enum
+    post: 
+      description: Player choose Color
+      parameters:
+        - name: playerID
+          in: path
+          type: integer
+      properties:
+          type: integer
+          required: true      
+      responses:
+        '200':
+        description: Color selected Successfully
+        parameters:
+          - in: query
+            name: color
+            schema:
+              type: integer
+            description: Choosing corresponding color
 
-  
-
+  /ludo/{gameID}/players/{playerID}/dice:
+    get:
+      description: Throw the dice
+      responses:
+        '200':
+          description: Dice throwed successifully 
+        '400':
+          description: Unable to throw the dice
