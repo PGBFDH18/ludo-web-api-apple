@@ -7,7 +7,7 @@ namespace GameEngine
     /// <summary>
     /// Store game state on local drive.
     /// </summary>
-    public class Storage : IProvider
+    public class Drive : ILoadSave
     {
         public string SavePath { get; set; }
         public string LoadPath { get; set; }
