@@ -7,7 +7,7 @@ namespace GameEngine
     public class Game
     {
         // Save och Load funktionalitet.
-        public IProvider Database { get; set; }
+        public ILoadSave LoadSaveMethod { get; set; }
 
         // Deltagarna ligger här!
         public List<Player> Players { get; set; }
@@ -17,7 +17,7 @@ namespace GameEngine
         public Game(List<Player> players, string databaseConnectionString)
         {
             Players = players;
-            Database = new Database(databaseConnectionString);
+            LoadSaveMethod = new Database(databaseConnectionString);
         }
     }
 }
