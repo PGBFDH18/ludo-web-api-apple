@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GameEngine;
-using Newtonsoft.Json;
 
 namespace WebApi.Controllers
 {
@@ -14,16 +13,16 @@ namespace WebApi.Controllers
     {
         // GET ludo/
         [HttpGet]
-        public ActionResult<List<Game>> Get() => new GamesContainer().Load();
+        public ActionResult<List<Game>> Get() => Ok(Game.LoadSaveService.Load());
 
         // POST ludo/
         [HttpPost]
-        public void Post(Game game) => new GamesContainer().Save(game);
+        public void Post(Game game) => Game.LoadSaveService.Save(game);
 
 
         // GET ludo/{gameID}
         [Route("{gameID}/")] // "override" första attributgrejen!
         [HttpGet]
-        public ActionResult<Game> Get(int gameID) => new GamesContainer().Load(gameID);
+        public ActionResult<Game> Get(int gameID) => Ok(Game.LoadSaveService.Load(gameID));
     }
 }

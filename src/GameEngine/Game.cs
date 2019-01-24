@@ -7,7 +7,7 @@ namespace GameEngine
     public class Game
     {
         // Save och Load funktionalitet.
-        //public ILoadSave LoadSaveMethod { get; set; }
+        public static ILoadSave LoadSaveService { get; set; }
 
         // Deltagarna ligger här!
         public List<Player> Players { get; set; }
@@ -46,7 +46,7 @@ namespace GameEngine
             Console.Clear();
 
             // Kontrollerar om pjäsen är inne i boet och tärningslagen är 1 eller 6.
-            if (piece.IsHome() && steps == 1 || steps == 6)
+            if (piece.IsHome && steps == 1 || steps == 6)
             {
                 piece.Move(steps);
                 //Console.WriteLine($"{piece} flyttade {steps} steg.");
@@ -76,7 +76,7 @@ namespace GameEngine
                 }
             }
 
-            if (piece.InGoal())
+            if (piece.InGoal)
             {
                 player.Pieces.RemoveAt(choice - 1);
                 if (player.Pieces.Count <= 0)
@@ -119,12 +119,12 @@ namespace GameEngine
         public void GameSetup()
         {
             // Lista med valbara färger.
-            var pieceColors = new List<Piece.PieceColor>
+            var pieceColors = new List<PieceColor>
             {
-                Piece.PieceColor.Red,
-                Piece.PieceColor.Blue,
-                Piece.PieceColor.Yellow,
-                Piece.PieceColor.Green
+                PieceColor.Red,
+                PieceColor.Blue,
+                PieceColor.Yellow,
+                PieceColor.Green
             };
 
             Console.WriteLine("Välkommen till PäronLudo!");
@@ -166,7 +166,7 @@ namespace GameEngine
                 // Lägger till 4 pjäser per färg.
                 for (int k = 0; k < 4; k++)
                 {
-                    Piece.PieceColor color = pieceColors[index - 1];
+                    PieceColor color = pieceColors[index - 1];
                     Piece piece = new Piece(color, k + 1, 0, correctionFactor);
                     player.Pieces.Add(piece);
                 }

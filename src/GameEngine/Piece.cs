@@ -7,15 +7,12 @@ namespace GameEngine
     /// </summary>
     public class Piece
     {
-        public enum PieceColor
-        {
-            Red, Blue, Yellow, Green
-        }
-
         public PieceColor Color { get; set; }
         public int Number { get; set; }
         public int CorrectionFactor { get; set; }
         private int position;
+        public bool IsHome => position == 0;
+        public bool InGoal => position >= 45;
 
         /// <summary>
         /// Initialises a new instance of Piece.
@@ -29,7 +26,7 @@ namespace GameEngine
             Color = color;
             Number = number;
             this.position = position;
-            this.CorrectionFactor = correctionFactor;
+            CorrectionFactor = correctionFactor;
         }
 
         // Flytta pjäsen 'steps' antal steg.
@@ -51,9 +48,6 @@ namespace GameEngine
 
         public void Home() => position = 0;
 
-        public bool IsHome() => position == 0;
-
-        public bool InGoal() => position >= 45;
 
         // Ersatts av instansvariabeln. Överge?
         public static bool IsOnOpponentPosition(Piece myPiece, Piece opponentPiece) =>

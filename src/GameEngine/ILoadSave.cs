@@ -6,7 +6,12 @@ namespace GameEngine
 {
     public interface ILoadSave
     {
+        string Source { get; set; }
+
         void Save(Game game);
+
         Game Load(int gameID);
+
+        List<Game> Load();
     }
 }

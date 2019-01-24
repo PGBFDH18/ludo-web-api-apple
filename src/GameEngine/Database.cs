@@ -8,23 +8,19 @@ using Dapper;
 
 namespace GameEngine
 {
+    // Observera! Övriga felhanteringar ska ske utanför klassen.
+
     /// <summary>
     /// Store game state on database.
     /// </summary>
     public class Database : ILoadSave
     {
-        public SqlConnection Connection { get; set; }
+        public string Source { get; set; } // <- Connection string.
 
         // Om man vill skicka SqlConnection object.
-        public Database(SqlConnection connection)
+        public Database(string connection)
         {
-            Connection = connection;
-        }
-
-        // Om man vill skicka en sträng som argument.
-        public Database(string connectionString)
-        {
-            Connection = new SqlConnection(connectionString);
+            Source = connection;
         }
 
         public void Save(Game game)
@@ -34,19 +30,19 @@ namespace GameEngine
 
         public Game Load(int gameID)
         {
-            var connection = Connection;
-            //SqlParameter parameter = new SqlParameter("@id", )
-            List<dynamic> games = connection.Query("SELECT * FROM Game WHERE ID = @id").AsList();
             throw new NotImplementedException();
+
+            var connection = new SqlConnection(Source);
+            List<dynamic> games = connection.Query("SELECT * FROM Game WHERE ID = @id").AsList();
         }
 
         public List<Game> Load()
         {
-            //CommandDefinition commandDefinition = new CommandDefinition();
-            //commandDefinition.CommandText = 
+            throw new NotImplementedException();
+
             string sql = "SELECT * FROM Game";
       
-            using (var connection = Connection)
+            using (var connection = new SqlConnection(Source))
             {
                 throw new NotImplementedException();
                 //Guid guid = new Guid();
@@ -55,8 +51,6 @@ namespace GameEngine
 
                 //"SELECT Name = @Name FROM Game", new Game(new List<Player>()) { Name = "@Name" })
             }
-
-            throw new NotImplementedException();
         }
     }
 }

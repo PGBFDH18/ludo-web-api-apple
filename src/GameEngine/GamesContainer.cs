@@ -7,8 +7,10 @@ using GameEngine;
 namespace WebApi
 {
     // Testklass (än så länge).
-    public class GamesContainer
+    public class GamesContainer : ILoadSave
     {
+        public string Source { get; set; } // Ingen betydelse.
+
         private static List<Game> games = new List<Game>();
 
         public void Save(Game game)
