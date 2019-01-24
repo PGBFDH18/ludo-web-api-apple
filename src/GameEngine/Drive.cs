@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace GameEngine
 {
@@ -12,14 +14,26 @@ namespace GameEngine
         public string SavePath { get; set; }
         public string LoadPath { get; set; }
 
+        public Drive(string savePath, string loadPath)
+        {
+            SavePath = savePath;
+            LoadPath = loadPath;
+        }
+
         public void Save(Game game)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            string json = JsonConvert.SerializeObject(game);
+            File.WriteAllText(SavePath, json);
         }
 
         public Game Load(int gameID)
         {
-            throw new NotImplementedException();
+            var jsonFromFile = File.ReadAllText(LoadPath);
+            Game game = (Game)JsonConvert.DeserializeObject(jsonFromFile);
+
+            return game;
         }
     }
 }
