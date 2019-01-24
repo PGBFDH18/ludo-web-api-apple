@@ -38,9 +38,9 @@
 <tr>
 <td>/ludo/{gameId}</td>
 <td>Detaljeret information om spelet, vart alla pjäser står</td>
+<td>Starta ett sparat spel</td>
 <td>N/A</td>
-<td>N/A</td>
-<td>Ta bort ett spel</td>
+<td>Ta bort ett sparat spel</td>
 </tr>
 <tr>
 <td>/ludo/{gameId}/players</td>
@@ -84,4 +84,4 @@ Sammanfattat är correctionFactor en "konstant" som adderas med pjäsens lokala 
 - Refactoring Console till *GameEngine*
 - Sätta upp och organisera SQL-database in *Gearhost*
 - Upprätta YAML-file i *VisualStudio* Code alt. *SwaggerHub*
-- Upprätta API:et i VisualStudio 
+- Upprätta API:et i VisualStudio
