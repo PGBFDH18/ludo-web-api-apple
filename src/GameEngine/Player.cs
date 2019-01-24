@@ -10,7 +10,7 @@ namespace GameEngine
     {
         // Spelarens pjäser ligger här!
         public List<Piece> Pieces { get; set; }
-        private int number;
+        public int Number { get; set; }
 
         /// <summary>
         /// Initialises a new Player.
@@ -19,9 +19,9 @@ namespace GameEngine
         public Player(int number)
         {
             Pieces = new List<Piece>(4);
-            this.number = number;
+            this.Number = number;
         }
 
-        public override string ToString() => $"Spelare {number}";
+        public override string ToString() => $"Spelare {Number}";
     }
 }

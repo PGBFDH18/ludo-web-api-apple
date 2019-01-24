@@ -14,7 +14,7 @@ namespace GameEngine
 
         public PieceColor Color { get; set; }
         public int Number { get; set; }
-        public int correctionFactor { get; set; }
+        public int CorrectionFactor { get; set; }
         private int position;
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace GameEngine
             Color = color;
             Number = number;
             this.position = position;
-            this.correctionFactor = correctionFactor;
+            this.CorrectionFactor = correctionFactor;
         }
 
         // Flytta pjäsen 'steps' antal steg.
@@ -41,12 +41,12 @@ namespace GameEngine
         // Hämta pjäsens "globala position".
         public int GetAbsolutePosition()
         {
-            if (position + correctionFactor > 40)
-                return position + correctionFactor - 40;
+            if (position + CorrectionFactor > 40)
+                return position + CorrectionFactor - 40;
             else if (position is 0)
                 return 0;
             else
-                return position + correctionFactor;
+                return position + CorrectionFactor;
         }
 
         public void Home() => position = 0;

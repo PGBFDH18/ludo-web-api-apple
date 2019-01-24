@@ -7,7 +7,7 @@ namespace GameEngine
     public class Game
     {
         // Save och Load funktionalitet.
-        public ILoadSave LoadSaveMethod { get; set; }
+        //public ILoadSave LoadSaveMethod { get; set; }
 
         // Deltagarna ligger här!
         public List<Player> Players { get; set; }
@@ -34,7 +34,7 @@ namespace GameEngine
         public void PlayerTurn(Player player)
         {
             int steps = Dice.Roll();
-            ListAllPieces();
+            //ListAllPieces();
 
             // Indexerad lista med endast nuvarande spelares pjäser.
             ListPlayerPieces(player);
@@ -90,18 +90,20 @@ namespace GameEngine
             Console.ReadKey();
         }
 
-        public void ListAllPieces()
+        public void ListAllPieces(int gameID)
         {
-            // För varje spelare...
-            Console.WriteLine("Piece, Position, AbsolutePosition");
-            foreach (var player in Players)
-            {
-                // För varje pjäs i spelare...
-                foreach (var piece in player.Pieces)
-                {
-                    Console.WriteLine($"{piece}, {piece.GetPosition()}, {piece.GetAbsolutePosition()}");
-                }
-            }
+            //// För varje spelare...
+            //Console.WriteLine("Piece, Position, AbsolutePosition");
+            //foreach (var player in Players)
+            //{
+            //    // För varje pjäs i spelare...
+            //    foreach (var piece in player.Pieces)
+            //    {
+            //        Console.WriteLine($"{piece}, {piece.GetPosition()}, {piece.GetAbsolutePosition()}");
+            //    }
+            //}
+
+            
         }
 
         public void ListPlayerPieces(Player player)
