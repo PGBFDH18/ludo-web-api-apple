@@ -3,6 +3,20 @@ info:
   version: '1.0.0'
   title: 'LudoGame Api'
   description: 'desc'
+components:
+  parameters:
+    gameIDParameter:
+      in: path
+      name: gameID
+      required: true
+      schema:
+        type: integer
+    playerIDParameter:
+      name: playerID
+      in: path
+      required: true
+      schema:
+        type: integer
 paths:
   /ludo:
     get:
@@ -11,7 +25,7 @@ paths:
         '200':
           description: Successfully returned saved games
           content:
-            application/json:
+            application/json: 
               schema:
                 type: array
                 items:
@@ -34,14 +48,10 @@ paths:
           description: Unable to create a new game
           
   /ludo/{gameID}:
+    parameters:
+      - $ref: '#/components/parameters/gameIDParameter'
     get:
       description: Detailed information about the game
-      parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: Successfully returned detailed information
@@ -60,23 +70,11 @@ paths:
           description: Unable to return detailed information
     post:
       description: Start a saved game
-      parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: Successfully started a saved game
     delete:
       description: Delete a game
-      parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: Successfully deleted a game
@@ -84,14 +82,10 @@ paths:
           description: Could not delete a game
     
   /ludo/{gameID}/players:  
+    parameters:
+      - $ref: '#/components/parameters/gameIDParameter'
     post:
-      description: Send information on how many players will play the game
-      parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
+      description: Send information on how many players will play the game      
       responses:
         '200':
           description: Successfully sent number of players
@@ -99,19 +93,11 @@ paths:
           description: Could not send number of players
 
   /ludo/{gameID}/players/{playerID}:
+    parameters:
+        - $ref: '#/components/parameters/gameIDParameter'
+        - $ref: '#/components/parameters/playerIDParameter'
     get:
       description: Colors to chose from
-      parameters:
-      - name: gameID
-        in: path
-        required: true
-        schema:
-          type: integer
-      - name: playerID
-        in: path
-        required: true
-        schema:
-          type: integer
       responses:
         '200':
           description: Successfully returned colors to choose from
@@ -124,16 +110,6 @@ paths:
     post: 
       description: Player choose Color
       parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
-        - name: playerID
-          in: path
-          required: true
-          schema:
-            type: integer
         - name: color
           in: query
           description: Allow player to choose color
@@ -141,24 +117,33 @@ paths:
             type: integer
       responses:
         '200':
-          description: Color selected Successfully
+          description: Color selected successfully
           
   /ludo/{gameID}/players/{playerID}/dice:
     get:
       description: Throw the dice
       parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
-        - name: playerID
-          in: path
-          required: true
-          schema:
-            type: integer
+        - $ref: '#/components/parameters/gameIDParameter'
+        - $ref: '#/components/parameters/playerIDParameter'
       responses:
         '200':
           description: Dice throwed successifully 
         '400':
           description: Unable to throw the dice
+
+  /ludo/{gameID}/players/{playerID}/piece:
+    post:
+      description: Choose piece to move
+      parameters:
+        - name: piece
+          in: query
+          description: Allow player to choose piece
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/gameIDParameter'
+        - $ref: '#/components/parameters/playerIDParameter'
+      responses:
+        '200':
+          description: Piece moved successfully
+        '400':
+          description: Could not move piece
