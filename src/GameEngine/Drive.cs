@@ -49,7 +49,7 @@ namespace GameEngine
             string json = File.ReadAllText(Source);
             var games = JsonConvert.DeserializeObject<IEnumerable<Game>>(json);
 
-            return games.Where(g => g.GameID == gameID).First();
+            return games.Where(g => g.ID == gameID).First();
         }
 
         public List<Game> Load()

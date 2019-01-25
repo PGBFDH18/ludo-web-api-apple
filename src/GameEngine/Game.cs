@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace GameEngine
 {
@@ -8,27 +9,33 @@ namespace GameEngine
     {
         // Save och Load funktionalitet.
         public static ILoadSave LoadSaveService { get; set; }
+        private static List<Game> games { get; set; } = new List<Game>();
 
         // Deltagarna ligger här!
         public List<Player> Players { get; set; }
-
         public string Name { get; set; }
-
-        public int GameID { get; set; }
-
+        public int ID { get; set; }
         public bool GameOver { get; set; }
-
-        private int numberOfPlayers;
-
-        public Game(List<Player> players)
+        private List<PieceColor> Colors = new List<PieceColor>
         {
-            Players = players;
-            //LoadSaveMethod = new Database(databaseConnectionString);
-        }
+            PieceColor.Red,
+            PieceColor.Blue,
+            PieceColor.Yellow,
+            PieceColor.Green
+        };
+
+    private int numberOfPlayers { get; set; }
+        //private int playerTurn { get; set; }
 
         public Game()
         {
 
+        }
+
+        public Game(string name)
+        {
+            Players = new List<Player>();
+            Name = name;
         }
 
         public void PlayerTurn(Player player)
@@ -37,7 +44,7 @@ namespace GameEngine
             //ListAllPieces();
 
             // Indexerad lista med endast nuvarande spelares pjäser.
-            ListPlayerPieces(player);
+            //ListPlayerPieces(player);
 
             // Spelaren väljer här vilken pjäs som ska flyttas från utifrån listan.
             Console.Write("Mata in index: ");
@@ -90,7 +97,7 @@ namespace GameEngine
             Console.ReadKey();
         }
 
-        public void ListAllPieces(int gameID)
+        public static List<Piece> ListAllPieces(int gameID)
         {
             //// För varje spelare...
             //Console.WriteLine("Piece, Position, AbsolutePosition");
@@ -103,17 +110,45 @@ namespace GameEngine
             //    }
             //}
 
-            
+            Game game = LoadSaveService.Load(gameID);
+            List<Player> players = game.Players;
+
+            var allPlayersPieces = new List<Piece>();
+            foreach (var player in players)
+                foreach (var piece in player.Pieces)
+                    allPlayersPieces.Add(piece);
+
+            return allPlayersPieces;
         }
 
-        public void ListPlayerPieces(Player player)
+        public List<Piece> ListPlayerPieces(int gameID, int playerNumber)
         {
             // Indexerad lista med endast nuvarande spelares pjäser.
-            for (int i = 0; i < player.Pieces.Count; i++)
+            //for (int i = 0; i < player.Pieces.Count; i++)
+            //{
+            //    Console.WriteLine($"[{i + 1}]: {player.Pieces[i]}, {player.Pieces[i].GetPosition()}, {player.Pieces[i].GetAbsolutePosition()}");
+            //}
+            //Console.WriteLine();
+
+            Game game = LoadSaveService.Load(gameID);
+            Player currentPlayer = game.Players.Where(p => p.Number == playerNumber).First();
+            List<Piece> playerPieces = currentPlayer.Pieces;
+
+            return playerPieces;
+        }
+
+        public void AddPlayer(Player player, PieceColor color)
+        {
+            for (int i = 0; i < 4; i++)
             {
-                Console.WriteLine($"[{i + 1}]: {player.Pieces[i]}, {player.Pieces[i].GetPosition()}, {player.Pieces[i].GetAbsolutePosition()}");
+                player.Pieces[i].Color = color;
             }
-            Console.WriteLine();
+            Colors.Remove(color);
+
+            if (Players.Count < 2 || Players.Count > 3)
+                throw new NotSupportedException("Between 2 and 4 participants required.");
+            else
+                Players.Add(player);
         }
 
         public void GameSetup()
@@ -176,5 +211,9 @@ namespace GameEngine
 
             //Game = new Game(players, databaseConnectionString);
         }
+
+        public static void Add(Game game) => games.Add(game);
+
+        public static Game Load(int gameID) => games.Where(g => g.ID == gameID).First();        
     }
 }

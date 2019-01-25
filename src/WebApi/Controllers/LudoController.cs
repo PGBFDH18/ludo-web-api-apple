@@ -11,18 +11,45 @@ namespace WebApi.Controllers
     [ApiController]
     public class LudoController : ControllerBase
     {
-        // GET ludo/
+        // GET ludo/    -Lista sparade fia spel
         [HttpGet]
-        public ActionResult<List<Game>> Get() => Ok(Game.LoadSaveService.Load());
+        public ActionResult<List<string>> Get() => Ok(Game.LoadSaveService.Load().Select(n => n.ID + ": " + n.Name));
 
-        // POST ludo/
+        // POST /ludo   -Skåpa ett nytt spel
         [HttpPost]
-        public void Post(Game game) => Game.LoadSaveService.Save(game);
+        public void Post([FromBody] string name) => Game.Add(new Game(name));
 
 
-        // GET ludo/{gameID}
-        [Route("{gameID}/")] // "override" första attributgrejen!
+        // GET /ludo/{gameID}   -Detaljerad information om spelet, som vart alla pjäser finns
+        [Route("{gameID}/")] // <- "override" första attributgrejen!
         [HttpGet]
-        public ActionResult<Game> Get(int gameID) => Ok(Game.LoadSaveService.Load(gameID));
+        public ActionResult<Game> Get(int gameID) => Ok(Game.ListAllPieces(gameID));
+
+        // POST /ludo/{gameID}  -Starta ett sparat spel (även spara spelet)
+        //[HttpPost]
+
+
+        // DELETE /ludo/{gameID}    -Ta bort ett sparat spel
+        //[HttpDelete]
+
+
+        //// POST /ludo/{gameID}/players      -Välja antal spelare 
+        //[HttpPost]
+
+
+        //// GET /ludo/{gameID}/players/{playerID}        -Lista på valbara färger
+        //[HttpGet]
+
+
+        //// POST /ludo/{gameID}/players/{playerID}       -Välja färg på pjäsen
+        //[HttpPost]
+
+
+        //// GET /ludo/{gameID}/players/{playerId}/dice       -En spelare slår med tärningen
+        //[HttpGet]
+
+
+        //// POST /ludo/{gameID}/players/{playerID}/{piece}       -Välja vilken pjäs man vill flytta
+        //[HttpPost]
     }
 }
