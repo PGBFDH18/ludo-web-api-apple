@@ -46,26 +46,33 @@ namespace WebApi.Controllers
 
 
         // DELETE /ludo/{gameID}    -Ta bort ett sparat spel
+        //[Route("{gameID}")]
         //[HttpDelete]
 
 
+
         //// POST /ludo/{gameID}/players      -Välja antal spelare 
+        //[Route("{gameID}/players")]
         //[HttpPost]
 
 
         //// GET /ludo/{gameID}/players/{playerID}        -Lista på valbara färger
+        //[Route("{gameID}/players/{playerID}")]
         //[HttpGet]
 
 
         //// POST /ludo/{gameID}/players/{playerID}       -Välja färg på pjäsen
+        //[Route("{gameID}/players/{playerID}")]
         //[HttpPost]
 
 
-        //// GET /ludo/{gameID}/players/{playerId}/dice       -En spelare slår med tärningen
+        //// GET /ludo/{gameID}/players/{playerID}/dice       -En spelare slår med tärningen
+        //[Route("{gameID}/players/{playerID}/dice")]
         //[HttpGet]
 
 
         //// POST /ludo/{gameID}/players/{playerID}/{piece}       -Välja vilken pjäs man vill flytta
+        //[Route("{gameID}/players/{playerID}/{piece}")]
         //[HttpPost]
     }
 }
