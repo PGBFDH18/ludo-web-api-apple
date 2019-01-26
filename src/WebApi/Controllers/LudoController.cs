@@ -13,11 +13,22 @@ namespace WebApi.Controllers
     {
         // GET ludo/    -Lista sparade fia spel
         [HttpGet]
-        public ActionResult<List<string>> Get() => Ok(Game.LoadSaveService.Load().Select(n => n.ID + ": " + n.Name));
+        public ActionResult<List<string>> Get()
+        {
+            try
+            {
+                return Ok(GamesContainer.ReadFromLoadSaveService().Select(n => $"{n.ID}: {n.Name}"));
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound("Inga sparade spel.");
+            }
+
+        }
 
         // POST /ludo   -Skåpa ett nytt spel
         [HttpPost]
-        public void Post([FromBody] string name) => Game.Add(new Game(name));
+        public void Post([FromBody] string name) => GamesContainer.WriteToMemory(new Game(name));
 
 
         // GET /ludo/{gameID}   -Detaljerad information om spelet, som vart alla pjäser finns
@@ -26,7 +37,12 @@ namespace WebApi.Controllers
         public ActionResult<Game> Get(int gameID) => Ok(Game.ListAllPieces(gameID));
 
         // POST /ludo/{gameID}  -Starta ett sparat spel (även spara spelet)
-        //[HttpPost]
+        [Route("{gameID}/")]
+        [HttpPost]
+        public void Post(int gameID)
+        {
+
+        }
 
 
         // DELETE /ludo/{gameID}    -Ta bort ett sparat spel

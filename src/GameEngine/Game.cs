@@ -9,7 +9,7 @@ namespace GameEngine
     {
         // Save och Load funktionalitet.
         public static ILoadSave LoadSaveService { get; set; }
-        private static List<Game> games { get; set; } = new List<Game>();
+        //private static List<Game> games { get; set; } = new List<Game>();
 
         // Deltagarna ligger här!
         public List<Player> Players { get; set; }
@@ -24,12 +24,11 @@ namespace GameEngine
             PieceColor.Green
         };
 
-    private int numberOfPlayers { get; set; }
-        //private int playerTurn { get; set; }
+        private int numberOfPlayers { get; set; }
 
         public Game()
         {
-
+            
         }
 
         public Game(string name)
@@ -99,21 +98,13 @@ namespace GameEngine
 
         public static List<Piece> ListAllPieces(int gameID)
         {
-            //// För varje spelare...
-            //Console.WriteLine("Piece, Position, AbsolutePosition");
-            //foreach (var player in Players)
-            //{
-            //    // För varje pjäs i spelare...
-            //    foreach (var piece in player.Pieces)
-            //    {
-            //        Console.WriteLine($"{piece}, {piece.GetPosition()}, {piece.GetAbsolutePosition()}");
-            //    }
-            //}
+            // Hämta spelare.
+            List<Player> players = LoadSaveService.Load(gameID).Players;
 
-            Game game = LoadSaveService.Load(gameID);
-            List<Player> players = game.Players;
-
+            // Lista som innehåller alla pjäser i spelet.
             var allPlayersPieces = new List<Piece>();
+
+            // Lägg till alla pjäser i listan.
             foreach (var player in players)
                 foreach (var piece in player.Pieces)
                     allPlayersPieces.Add(piece);
@@ -121,99 +112,101 @@ namespace GameEngine
             return allPlayersPieces;
         }
 
-        public List<Piece> ListPlayerPieces(int gameID, int playerNumber)
-        {
-            // Indexerad lista med endast nuvarande spelares pjäser.
-            //for (int i = 0; i < player.Pieces.Count; i++)
-            //{
-            //    Console.WriteLine($"[{i + 1}]: {player.Pieces[i]}, {player.Pieces[i].GetPosition()}, {player.Pieces[i].GetAbsolutePosition()}");
-            //}
-            //Console.WriteLine();
+        /// <summary>
+        /// Returns a list of pieces on a specific game and player.
+        /// </summary>
+        /// <param name="gameID">Game ID of a game on file.</param>
+        /// <param name="playerNumber">Number of the player in the game.</param>
+        /// <returns></returns>
+        public List<Piece> ListPlayerPieces(int gameID, int playerNumber) =>
+            LoadSaveService.Load(gameID) // Ladda spel.
+            .Players.Where(p => p.Number == playerNumber) // Hämta spelaren från spelet.
+            .First().Pieces; // Hämta pjäserna från spelaren.
 
-            Game game = LoadSaveService.Load(gameID);
-            Player currentPlayer = game.Players.Where(p => p.Number == playerNumber).First();
-            List<Piece> playerPieces = currentPlayer.Pieces;
-
-            return playerPieces;
-        }
-
+        /// <summary>
+        /// Adds a player to a game which is present in memory.
+        /// </summary>
+        /// <param name="player">Instance of Player.</param>
+        /// <param name="color">Identifies the player and sets piece color.</param>
         public void AddPlayer(Player player, PieceColor color)
         {
-            for (int i = 0, cf = 0; i < 4; i++, cf += 10)
-            {
-                player.Pieces[i] = new Piece(color, i + 1, 0, cf);
-            }
+            // correctionFactor förskjuts med 10 för varje spelare.
+            int correctionFactor = Players.Count * 10;
+            for (int i = 0; i < 4; i++)
+                player.Pieces[i] = new Piece(color, i + 1, 0, correctionFactor);
             Colors.Remove(color);
 
             if (Players.Count < 2 || Players.Count > 3)
-                throw new NotSupportedException("Between 2 and 4 participants required.");
+                throw new NotSupportedException($"Between 2 and 4 participants required. Participant count: {Players.Count}");
             else
                 Players.Add(player);
         }
 
-        public void GameSetup()
-        {
-            // Lista med valbara färger.
-            var pieceColors = new List<PieceColor>
-            {
-                PieceColor.Red,
-                PieceColor.Blue,
-                PieceColor.Yellow,
-                PieceColor.Green
-            };
+        //#region "Övergivna metoder"
+        //public void GameSetup()
+        //{
+        //    // Lista med valbara färger.
+        //    var pieceColors = new List<PieceColor>
+        //    {
+        //        PieceColor.Red,
+        //        PieceColor.Blue,
+        //        PieceColor.Yellow,
+        //        PieceColor.Green
+        //    };
 
-            Console.WriteLine("Välkommen till PäronLudo!");
+        //    Console.WriteLine("Välkommen till PäronLudo!");
 
-            bool checker = true;
-            while (checker)
-            {
-                Console.Write("Hur många spelare skall spela? (2-4): ");
-                numberOfPlayers = int.Parse(Console.ReadLine());
+        //    bool checker = true;
+        //    while (checker)
+        //    {
+        //        Console.Write("Hur många spelare skall spela? (2-4): ");
+        //        numberOfPlayers = int.Parse(Console.ReadLine());
 
-                if (numberOfPlayers > 1 && numberOfPlayers < 5)
-                {
-                    checker = false;
-                }
-                else
-                {
-                    Console.WriteLine("Du måste ange 2-4 spelare!");
-                }
-            }
+        //        if (numberOfPlayers > 1 && numberOfPlayers < 5)
+        //        {
+        //            checker = false;
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("Du måste ange 2-4 spelare!");
+        //        }
+        //    }
 
-            List<Player> players = new List<Player>(4);
+        //    List<Player> players = new List<Player>(4);
 
-            for (int i = 0, correctionFactor = 0; i < numberOfPlayers; i++, correctionFactor += 10)
-            {
-                Player player = new Player(i + 1);
-                //// Skriv ut lista på valbara färger.
-                for (int j = 0; j < pieceColors.Count; j++)
-                {
-                    Console.WriteLine($"[{j + 1}]: " + pieceColors[j]);
-                }
-                Console.WriteLine();
+        //    for (int i = 0, correctionFactor = 0; i < numberOfPlayers; i++, correctionFactor += 10)
+        //    {
+        //        Player player = new Player(i + 1);
+        //        //// Skriv ut lista på valbara färger.
+        //        for (int j = 0; j < pieceColors.Count; j++)
+        //        {
+        //            Console.WriteLine($"[{j + 1}]: " + pieceColors[j]);
+        //        }
+        //        Console.WriteLine();
 
-                // Val av färg.
-                Console.Write($"Spelare {i + 1} välj färg att spela med: ");
-                var index = int.Parse(Console.ReadLine());
-                Console.Clear();
+        //        // Val av färg.
+        //        Console.Write($"Spelare {i + 1} välj färg att spela med: ");
+        //        var index = int.Parse(Console.ReadLine());
+        //        Console.Clear();
 
-                // Tilldela startpostitioner till pjäser.                
-                // Lägger till 4 pjäser per färg.
-                for (int k = 0; k < 4; k++)
-                {
-                    PieceColor color = pieceColors[index - 1];
-                    Piece piece = new Piece(color, k + 1, 0, correctionFactor);
-                    player.Pieces.Add(piece);
-                }
-                pieceColors.RemoveAt(index - 1);
-                players.Add(player);
-            }
+        //        // Tilldela startpostitioner till pjäser.                
+        //        // Lägger till 4 pjäser per färg.
+        //        for (int k = 0; k < 4; k++)
+        //        {
+        //            PieceColor color = pieceColors[index - 1];
+        //            Piece piece = new Piece(color, k + 1, 0, correctionFactor);
+        //            player.Pieces.Add(piece);
+        //        }
+        //        pieceColors.RemoveAt(index - 1);
+        //        players.Add(player);
+        //    }
 
-            //Game = new Game(players, databaseConnectionString);
-        }
+        //    //Game = new Game(players, databaseConnectionString);
+        //}
+        //#endregion
 
-        public static void Add(Game game) => games.Add(game);
+        //public static void AddToMemory(Game game) => games.Add(game);
 
-        public static Game Load(int gameID) => games.Where(g => g.ID == gameID).First();        
+        //public static Game LoadFromMemory(int gameID) => games.Where(g => g.ID == gameID).First();      
     }
 }

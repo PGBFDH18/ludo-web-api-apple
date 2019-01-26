@@ -6,36 +6,30 @@ using GameEngine;
 
 namespace WebApi
 {
-    // Testklass (än så länge).
     public static class GamesContainer
     {
+        private static ILoadSave loadSaveService;
         private static List<Game> games = new List<Game>();
 
-        public static void Add(Game game)
-        {
-            games.Add(game);
-        }
+        // Vilken spara/ladda-service som ska användas bestäms i Program.Main().
+        public static ILoadSave LoadSaveService { set => loadSaveService = value; }
 
-        public static Game GetGame(int gameID)
-        {
-            var resultGame = 
-                from game in games
-                where game.ID == gameID
-                select game;
+        // Minne.
+        public static void WriteToMemory(Game game) => games.Add(game);
 
-            return resultGame.First(); 
-        }
+        public static Game ReadFromMemory(int gameID) => games.Where(g => g.ID == gameID).First();
 
-        public static List<Game> Load() => games;
+        public static List<Game> ReadFromMemory() => games;
 
-        public static void Delete(int gameID)
-        {
-            games.Remove(games.Where(g => g.ID == gameID).First());
-        }
+        public static void Delete(int gameID) => games.Remove(games.Where(g => g.ID == gameID).First());
 
-        public static void DeleteAll()
-        {
-            games.Clear();
-        }
+        public static void DeleteAll() => games.Clear();
+
+        // Lagring.
+        public static void WriteToLoadSaveService(Game game) => loadSaveService.Save(game);
+
+        public static Game ReadFromLoadSaveService(int gameID) => loadSaveService.Load(gameID);
+
+        public static List<Game> ReadFromLoadSaveService() => loadSaveService.Load();
     }
 }

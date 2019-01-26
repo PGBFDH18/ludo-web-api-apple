@@ -14,12 +14,15 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
-            string currentDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "saved_games.json");
+            // Ange antingen sökväg till fil eller db connection string beroende på service.
+            string source = 
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "saved_games.json");
 
             // Om filen inte existerar, skapa den.
-            if (!File.Exists(currentDirectory))
-                File.Create(currentDirectory);
-            GameEngine.Game.LoadSaveService = new GameEngine.Drive(currentDirectory);
+            if (!File.Exists(source))
+                File.Create(source);
+            //GameEngine.Game.LoadSaveService = new GameEngine.Drive(currentDirectory);
+            GamesContainer.LoadSaveService = new GameEngine.Drive(source);
 
             CreateWebHostBuilder(args).Build().Run();
         }
