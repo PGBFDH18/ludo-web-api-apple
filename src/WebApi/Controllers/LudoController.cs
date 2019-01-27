@@ -17,7 +17,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                return Ok(GamesContainer.ReadFromLoadSaveService().Select(n => $"{n.ID}: {n.Name}"));
+                return Ok(Game.GamesContainer.Load().Select(n => $"{n.ID}: {n.Name}"));
             }
             catch (ArgumentNullException)
             {
@@ -28,7 +28,7 @@ namespace WebApi.Controllers
 
         // POST /ludo   -Skåpa ett nytt spel
         [HttpPost]
-        public void Post([FromBody] string name) => GamesContainer.WriteToMemory(new Game(name));
+        public void Post([FromBody] string name) => Game.GamesContainer.Add(new Game(name));
 
 
         // GET /ludo/{gameID}   -Detaljerad information om spelet, som vart alla pjäser finns
@@ -41,7 +41,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public void Post(int gameID)
         {
-
+             
         }
 
 

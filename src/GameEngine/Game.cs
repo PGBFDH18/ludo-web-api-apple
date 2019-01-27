@@ -8,15 +8,16 @@ namespace GameEngine
     public class Game
     {
         // Save och Load funktionalitet.
-        public static ILoadSave LoadSaveService { get; set; }
-        //private static List<Game> games { get; set; } = new List<Game>();
+        public static ILoadSave LoadSaveService { get; set; } // Spara till fil eller databas.
+        public static IGamesContainer GamesContainer { get; set; } // Spara till minnet.
 
         // Deltagarna ligger här!
         public List<Player> Players { get; set; }
         public string Name { get; set; }
         public int ID { get; set; }
         public bool GameOver { get; set; }
-        private List<PieceColor> Colors = new List<PieceColor>
+        public GameState GameState { get; set; }
+        private List<PieceColor> colors = new List<PieceColor>
         {
             PieceColor.Red,
             PieceColor.Blue,
@@ -24,17 +25,16 @@ namespace GameEngine
             PieceColor.Green
         };
 
-        private int numberOfPlayers { get; set; }
 
         public Game()
-        {
-            
+        {            
         }
 
         public Game(string name)
         {
             Players = new List<Player>();
             Name = name;
+            GameState = GameState.NotStarted;
         }
 
         public void PlayerTurn(Player player)
@@ -134,12 +134,17 @@ namespace GameEngine
             int correctionFactor = Players.Count * 10;
             for (int i = 0; i < 4; i++)
                 player.Pieces[i] = new Piece(color, i + 1, 0, correctionFactor);
-            Colors.Remove(color);
+            colors.Remove(color);
 
             if (Players.Count < 2 || Players.Count > 3)
                 throw new NotSupportedException($"Between 2 and 4 participants required. Participant count: {Players.Count}");
             else
                 Players.Add(player);
+        }
+
+        public void SetupDone()
+        {
+
         }
 
         //#region "Övergivna metoder"

@@ -21,8 +21,8 @@ namespace WebApi
             // Om filen inte existerar, skapa den.
             if (!File.Exists(source))
                 File.Create(source);
-            //GameEngine.Game.LoadSaveService = new GameEngine.Drive(currentDirectory);
-            GamesContainer.LoadSaveService = new GameEngine.Drive(source);
+            GameEngine.Game.LoadSaveService = new GameEngine.Drive(source);
+            GameEngine.Game.GamesContainer = new GameEngine.GamesContainer();
 
             CreateWebHostBuilder(args).Build().Run();
         }

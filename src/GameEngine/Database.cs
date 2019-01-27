@@ -52,5 +52,10 @@ namespace GameEngine
                 //"SELECT Name = @Name FROM Game", new Game(new List<Player>()) { Name = "@Name" })
             }
         }
+
+        public void Delete(int gameID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

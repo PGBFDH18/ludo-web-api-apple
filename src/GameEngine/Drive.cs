@@ -73,5 +73,12 @@ namespace GameEngine
                 return game;
             }
         }
+
+        public void Delete(int gameID)
+        {
+            var games = Load();
+            games.RemoveAll(g => g.ID == gameID);
+
+        }
     }
 }
