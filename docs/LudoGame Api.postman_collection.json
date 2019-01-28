@@ -1,0 +1,940 @@
+{
+	"info": {
+		"_postman_id": "6863e2ec-63fa-4e26-b18e-fe8027149cc5",
+		"name": "LudoGame Api",
+		"description": "All about Ludo!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ludo",
+			"item": [
+				{
+					"name": "{game ID}",
+					"item": [
+						{
+							"name": "players",
+							"item": [
+								{
+									"name": "{player ID}",
+									"item": [
+										{
+											"name": "/ludo/:gameID/players/:playerID/dice",
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{baseUrl}}/ludo/:gameID/players/:playerID/dice",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"ludo",
+														":gameID",
+														"players",
+														":playerID",
+														"dice"
+													],
+													"variable": [
+														{
+															"key": "gameID",
+															"value": "<integer>",
+															"description": {
+																"content": "",
+																"type": "text/plain"
+															}
+														},
+														{
+															"key": "playerID",
+															"value": "<integer>",
+															"description": {
+																"content": "",
+																"type": "text/plain"
+															}
+														}
+													]
+												},
+												"description": "Throw the dice and receive the value"
+											},
+											"response": [
+												{
+													"name": "Unable to throw the dice and return value",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": ""
+														},
+														"url": {
+															"raw": "{{baseUrl}}/ludo/<integer>/players/<integer>/dice",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"ludo",
+																"<integer>",
+																"players",
+																"<integer>",
+																"dice"
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "Text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Dice throwed and returned value successfully",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": ""
+														},
+														"url": {
+															"raw": "{{baseUrl}}/ludo/<integer>/players/<integer>/dice",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"ludo",
+																"<integer>",
+																"players",
+																"<integer>",
+																"dice"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "Text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										},
+										{
+											"name": "/ludo/:gameID/players/:playerID/:pieceID",
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{baseUrl}}/ludo/:gameID/players/:playerID/:pieceID",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"ludo",
+														":gameID",
+														"players",
+														":playerID",
+														":pieceID"
+													],
+													"variable": [
+														{
+															"key": "gameID",
+															"value": "<integer>",
+															"description": {
+																"content": "",
+																"type": "text/plain"
+															}
+														},
+														{
+															"key": "playerID",
+															"value": "<integer>",
+															"description": {
+																"content": "",
+																"type": "text/plain"
+															}
+														},
+														{
+															"key": "pieceID",
+															"value": "<integer>",
+															"description": {
+																"content": "",
+																"type": "text/plain"
+															}
+														}
+													]
+												},
+												"description": "Choose piece to move"
+											},
+											"response": [
+												{
+													"name": "Could not move piece",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": ""
+														},
+														"url": {
+															"raw": "{{baseUrl}}/ludo/<integer>/players/<integer>/<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"ludo",
+																"<integer>",
+																"players",
+																"<integer>",
+																"<integer>"
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "Text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Piece moved successfully",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": ""
+														},
+														"url": {
+															"raw": "{{baseUrl}}/ludo/<integer>/players/<integer>/<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"ludo",
+																"<integer>",
+																"players",
+																"<integer>",
+																"<integer>"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "Text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "/ludo/:gameID/players",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/ludo/:gameID/players",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"ludo",
+												":gameID",
+												"players"
+											],
+											"variable": [
+												{
+													"key": "gameID",
+													"value": "<integer>",
+													"description": {
+														"content": "",
+														"type": "text/plain"
+													}
+												}
+											]
+										},
+										"description": "Create a new player with color"
+									},
+									"response": [
+										{
+											"name": "Could not create/add a player",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{baseUrl}}/ludo/<integer>/players",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"ludo",
+														"<integer>",
+														"players"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "Text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Successfully created/added a player",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": ""
+												},
+												"url": {
+													"raw": "{{baseUrl}}/ludo/<integer>/players",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"ludo",
+														"<integer>",
+														"players"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "Text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "/ludo/:gameID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/ludo/:gameID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"ludo",
+										":gameID"
+									],
+									"variable": [
+										{
+											"key": "gameID",
+											"value": "<integer>",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"description": "Detailed information about the game"
+							},
+							"response": [
+								{
+									"name": "Successfully returned detailed information",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/ludo/<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"ludo",
+												"<integer>"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n \"<object>\",\n \"<object>\"\n]"
+								},
+								{
+									"name": "Unable to return detailed information",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/ludo/<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"ludo",
+												"<integer>"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/ludo/:gameID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/ludo/:gameID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"ludo",
+										":gameID"
+									],
+									"variable": [
+										{
+											"key": "gameID",
+											"value": "<integer>",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"description": "Start a saved game"
+							},
+							"response": [
+								{
+									"name": "Successfully started a saved game",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/ludo/<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"ludo",
+												"<integer>"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/ludo/:gameID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/ludo/:gameID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"ludo",
+										":gameID"
+									],
+									"variable": [
+										{
+											"key": "gameID",
+											"value": "<integer>",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"description": "Delete a game"
+							},
+							"response": [
+								{
+									"name": "Could not delete a game",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/ludo/<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"ludo",
+												"<integer>"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Successfully deleted a game",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/ludo/<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"ludo",
+												"<integer>"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/ludo/:gameID/save",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/ludo/:gameID/save",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"ludo",
+										":gameID",
+										"save"
+									],
+									"variable": [
+										{
+											"key": "gameID",
+											"value": "<integer>",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"description": "Save a game"
+							},
+							"response": [
+								{
+									"name": "Unable to save game",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/ludo/<integer>/save",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"ludo",
+												"<integer>",
+												"save"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Successfully saved the game",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/ludo/<integer>/save",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"ludo",
+												"<integer>",
+												"save"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "/ludo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ludo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ludo"
+							]
+						},
+						"description": "List of available saved Ludo games"
+					},
+					"response": [
+						{
+							"name": "Successfully returned saved games",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/ludo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"ludo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n \"<string>\",\n \"<string>\"\n]"
+						},
+						{
+							"name": "No games found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/ludo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"ludo"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/ludo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ludo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ludo"
+							]
+						},
+						"description": "Create a new game"
+					},
+					"response": [
+						{
+							"name": "Successfully created a new game",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/ludo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"ludo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unable to create a new game",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/ludo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"ludo"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}
