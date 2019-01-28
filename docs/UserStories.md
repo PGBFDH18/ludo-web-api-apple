@@ -43,9 +43,9 @@
 <td>Ta bort ett sparat spel</td>
 </tr>
 <tr>
-<td>/ludo/{gameId}/players</td>
+<td>/ludo/{gameId}/save</td>
 <td>N/A</td>
-<td>N/A</td>
+<td>Spara ett spel</td>
 <td>N/A</td>
 <td>N/A</td>
 </tr>
