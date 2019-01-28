@@ -11,6 +11,7 @@ namespace GameEngine
         // Spelarens pjäser ligger här!
         public List<Piece> Pieces { get; set; }
         public int Number { get; set; }
+        public int DiceValue { get; set; }
 
         /// <summary>
         /// Initialises a new Player.

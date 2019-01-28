@@ -128,15 +128,20 @@ namespace GameEngine
         /// </summary>
         /// <param name="player">Instance of Player.</param>
         /// <param name="color">Identifies the player and sets piece color.</param>
-        public void AddPlayer(Player player, PieceColor color)
+        public void AddPlayer(PieceColor color)
         {
+            Player player = new Player(Players.Count + 1);
             // correctionFactor förskjuts med 10 för varje spelare.
+            if (!colors.Contains(color))
+                throw new NotSupportedException($"Color '{color.ToString()}' already selected.");
+
             int correctionFactor = Players.Count * 10;
             for (int i = 0; i < 4; i++)
-                player.Pieces[i] = new Piece(color, i + 1, 0, correctionFactor);
+                player.Pieces.Add(new Piece(color, i + 1, 0, correctionFactor));
             colors.Remove(color);
 
-            if (Players.Count < 2 || Players.Count > 3)
+            // Tas bort.
+            if (Players.Count > 3)
                 throw new NotSupportedException($"Between 2 and 4 participants required. Participant count: {Players.Count}");
             else
                 Players.Add(player);

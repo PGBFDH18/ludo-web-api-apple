@@ -47,9 +47,21 @@ namespace GameEngine
         public Game Load(int gameID)
         {
             string json = File.ReadAllText(Source);
-            var games = JsonConvert.DeserializeObject<IEnumerable<Game>>(json);
-
-            return games.Where(g => g.ID == gameID).First();
+            try
+            {
+                var games = JsonConvert.DeserializeObject<List<Game>>(json);
+                return games.Where(g => g.ID == gameID).First();
+            }
+            catch (JsonSerializationException)
+            {
+                // Obs! List med bara ETT spel.
+                var game = new List<Game>(1)
+                {
+                    // JSON-array genereras från List.
+                    JsonConvert.DeserializeObject<Game>(json)
+                };
+                return game.First();
+            }
         }
 
         public List<Game> Load()
@@ -78,7 +90,17 @@ namespace GameEngine
         {
             var games = Load();
             games.RemoveAll(g => g.ID == gameID);
+            string json = JsonConvert.SerializeObject(games);
+            File.WriteAllText(Source, json);
+        }
 
+        public void Update(Game game)
+        {
+            List<Game> existingGames = Load();
+            existingGames.RemoveAll(g => g.ID == game.ID);
+            existingGames.Add(game);
+            string json = JsonConvert.SerializeObject(existingGames);
+            File.WriteAllText(Source, json);
         }
     }
 }

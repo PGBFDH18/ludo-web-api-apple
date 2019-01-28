@@ -9,5 +9,6 @@ namespace GameEngine
         void Add(Game game);
         Game Load(int gameID);
         List<Game> Load();
+        void Delete(int gameID);
     }
 }

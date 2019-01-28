@@ -15,5 +15,7 @@ namespace GameEngine
         List<Game> Load();
 
         void Delete(int gameID);
+
+        void Update(Game game);
     }
 }

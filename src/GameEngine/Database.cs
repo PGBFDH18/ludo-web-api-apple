@@ -57,5 +57,10 @@ namespace GameEngine
         {
             throw new NotImplementedException();
         }
+
+        public void Update(Game game)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
