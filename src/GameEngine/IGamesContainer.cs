@@ -4,18 +4,11 @@ using System.Text;
 
 namespace GameEngine
 {
-    public interface ILoadSave
+    public interface IGamesContainer
     {
-        string Source { get; set; }
-
-        void Save(Game game);
-
+        void Add(Game game);
         Game Load(int gameID);
-
         List<Game> Load();
-
         void Delete(int gameID);
-
-        void Update(Game game);
     }
 }

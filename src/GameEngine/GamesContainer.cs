@@ -4,38 +4,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameEngine;
 
-namespace WebApi
+namespace GameEngine
 {
-    // Testklass (än så länge).
-    public static class GamesContainer
+    public class GamesContainer : IGamesContainer
     {
         private static List<Game> games = new List<Game>();
 
-        public static void Add(Game game)
+        public void Add(Game game)
         {
+            // Bug: Only one game can be present in memory at a time.
+            var gameIds = new List<int>();
+            try
+            {
+                gameIds = Game.LoadSaveService.Load().Select(g => g.ID).ToList();
+                game.ID = gameIds.Max(id => id) + 1;
+            }
+            catch (Exception)
+            {
+                gameIds.Add(0);
+            }
             games.Add(game);
         }
 
-        public static Game GetGame(int gameID)
+        public void Delete(int gameID)
         {
-            var resultGame = 
-                from game in games
-                where game.ID == gameID
-                select game;
-
-            return resultGame.First(); 
+            Game gameToRemove = games.Where(g => g.ID == gameID).First();
+            games.Remove(gameToRemove);
         }
 
-        public static List<Game> Load() => games;
+        public Game Load(int gameID) => games.Where(g => g.ID == gameID).First();
 
-        public static void Delete(int gameID)
-        {
-            games.Remove(games.Where(g => g.ID == gameID).First());
-        }
-
-        public static void DeleteAll()
-        {
-            games.Clear();
-        }
+        public List<Game> Load() => games;
     }
 }
