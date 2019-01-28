@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameEngine
 {
-    enum GameState
+    public enum GameState
     {
         Started, NotStarted, Ended
     }
