@@ -1,17 +1,37 @@
 openapi: 3.0.0
 info:
-  version: '0.0.1'
-  title: 'Ludo API apple group'
-  description: 'All about ludo'
+  version: '1.0.0'
+  title: 'LudoGame Api'
+  description: 'desc'
+components:
+  parameters:
+    gameIDParameter:
+      in: path
+      name: gameID
+      required: true
+      schema:
+        type: integer
+    playerIDParameter:
+      name: playerID
+      in: path
+      required: true
+      schema:
+        type: integer
+    pieceIDParameter:
+      name: pieceIDParameter
+      in: path
+      required: true
+      schema:
+        type: integer
 paths:
   /ludo:
     get:
-      description: List of available Ludo games
+      description: List of available saved Ludo games
       responses:
         '200':
           description: Successfully returned saved games
           content:
-            application/json:
+            application/json: 
               schema:
                 type: array
                 items:
@@ -19,23 +39,18 @@ paths:
         '400':
           description: No games found    
     post:
-      description: Create Ney Game
+      description: Create a new game
       responses:
         '200':
-          description: Successfully created game (method BeginGame started)
+          description: Successfully created a new game
         '400':
-          description: Unable to create game
+          description: Unable to create a new game
           
   /ludo/{gameID}:
+    parameters:
+      - $ref: '#/components/parameters/gameIDParameter'
     get:
       description: Detailed information about the game
-      parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: Enter the Game ID
       responses:
         '200':
           description: Successfully returned detailed information
@@ -45,68 +60,63 @@ paths:
                 type: array
                 items:
                   type: object
-                  properties:
-                    Players:
-                      type: array
-                      items:
-                        type: object
         '400':
           description: Unable to return detailed information
-          
+    post:
+      description: Start a saved game
+      responses:
+        '200':
+          description: Successfully started a saved game
     delete:
       description: Delete a game
-      parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: Enter Game ID to delete
       responses:
         '200':
           description: Successfully deleted a game
         '400':
           description: Could not delete a game
+
+  /ludo/{gameID}/save:
+    parameters:
+      - $ref: '#/components/parameters/gameIDParameter'
+    get:
+      description: Save a game
+      responses:
+        '200':
+          description: Successfully saved the game
+        '400':
+          description: Unable to save game
     
   /ludo/{gameID}/players:  
+    parameters:
+      - $ref: '#/components/parameters/gameIDParameter'
     post:
-      description: Send information on how many players will play the game
-      parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
-        - name: nrOfPlayers
-          in: query
-          required: true
-          description: Choose how many players in game 
-          schema:
-            type: integer
+      description: Create a new player with color
       responses:
         '200':
-          description: Successfully sent number of players
+          description: Successfully created/added a player
         '400':
-          description: Could not send number of players
-          
+          description: Could not create/add a player
+            
   /ludo/{gameID}/players/{playerID}/dice:
     get:
-      description: Throw the dice
+      description: Throw the dice and receive the value
       parameters:
-        - name: gameID
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: Enter Game ID
-        - name: playerID
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: Enter Player ID
+        - $ref: '#/components/parameters/gameIDParameter'
+        - $ref: '#/components/parameters/playerIDParameter'
       responses:
         '200':
-          description: Dice throwed successifully 
+          description: Dice throwed and returned value successfully 
         '400':
-          description: Unable to throw the dice
+          description: Unable to throw the dice and return value
+  /ludo/{gameID}/players/{playerID}/{piece}:
+    post:
+      description: Choose piece to move
+      parameters:
+        - $ref: '#/components/parameters/gameIDParameter'
+        - $ref: '#/components/parameters/playerIDParameter'
+        - $ref: '#/components/parameters/pieceIDParameter'
+      responses:
+        '200':
+          description: Piece moved successfully
+        '400':
+          description: Could not move piece
