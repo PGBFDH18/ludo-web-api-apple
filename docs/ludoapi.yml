@@ -62,10 +62,24 @@ paths:
                 items:
                   type: object
                   properties:
+                    name:
+                    gameID:
+                    gameOver:
                     Players:
                       type: array
                       items:
                         type: object
+                        properties:
+                          Pieces:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                color:
+                                number:
+                                correctionFactor:
+                          number:
+
         '400':
           description: Unable to return detailed information
     post:
