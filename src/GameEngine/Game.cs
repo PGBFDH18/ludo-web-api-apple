@@ -139,9 +139,9 @@ namespace GameEngine
 
         public void AddPlayer(Player player, PieceColor color)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0, cf = 0; i < 4; i++, cf += 10)
             {
-                player.Pieces[i].Color = color;
+                player.Pieces[i] = new Piece(color, i + 1, 0, cf);
             }
             Colors.Remove(color);
 
