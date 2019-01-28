@@ -49,6 +49,13 @@
 <td>N/A</td>
 </tr>
 <tr>
+<td>/ludo/{gameId}/players</td>
+<td>N/A</td>
+<td>Ny spelare skapas</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
 <td>/ludo/{gameId}/players/{playerId}/dice</td>
 <td>Visa vad tärningsslaget visade</td>
 <td>N/A</td>
