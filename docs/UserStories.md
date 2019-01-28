@@ -30,7 +30,7 @@
 <tbody>
 <tr>
 <td>/ludo</td>
-<td>Lista över existerande Ludospel</td>
+<td>Lista över sparade Ludospel</td>
 <td>Skapa ett nytt spel</td>
 <td>N/A</td>
 <td>N/A</td>
@@ -45,20 +45,20 @@
 <tr>
 <td>/ludo/{gameId}/players</td>
 <td>N/A</td>
-<td>Ange antal spelare</td>
+<td>N/A</td>
 <td>N/A</td>
 <td>N/A</td>
 </tr>
 <tr>
 <td>/ludo/{gameId}/players/{playerId}</td>
 <td>Lista på valbara färger</td>
-<td>Ange färg på pjäsen</td>
+<td>Välja färg på pjäsen</td>
 <td>N/A</td>
 <td>N/A</td>
 </tr>
 <tr>
 <td>/ludo/{gameId}/players/{playerId}/dice</td>
-<td>En spelare slår med tärningen</td>
+<td>Visa vad tärningsslaget visade</td>
 <td>N/A</td>
 <td>N/A</td>
 <td>N/A</td>
