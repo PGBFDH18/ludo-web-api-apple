@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: '1.0.0'
   title: 'LudoGame Api'
-  description: 'desc'
+  description: 'All about Ludo!'
 components:
   parameters:
     gameIDParameter:
@@ -17,10 +17,16 @@ components:
       required: true
       schema:
         type: integer
+    pieceIDParameter:
+      name: pieceID
+      in: path
+      required: true
+      schema:
+        type: integer
 paths:
   /ludo:
     get:
-      description: List of available Ludo games
+      description: List of available saved Ludo games
       responses:
         '200':
           description: Successfully returned saved games
@@ -34,16 +40,9 @@ paths:
           description: No games found    
     post:
       description: Create a new game
-      requestBody:
-        description: Naming the started game
-        required: true
-        content:
-          application/json:
-            schema:
-              type: string
       responses:
         '200':
-          description: Successfully created a new game (method BeginGame started)
+          description: Successfully created a new game
         '400':
           description: Unable to create a new game
           
@@ -61,11 +60,6 @@ paths:
                 type: array
                 items:
                   type: object
-                  properties:
-                    Players:
-                      type: array
-                      items:
-                        type: object
         '400':
           description: Unable to return detailed information
     post:
@@ -80,68 +74,47 @@ paths:
           description: Successfully deleted a game
         '400':
           description: Could not delete a game
+
+  /ludo/{gameID}/save:
+    parameters:
+      - $ref: '#/components/parameters/gameIDParameter'
+    get:
+      description: Save a game
+      responses:
+        '200':
+          description: Successfully saved the game
+        '400':
+          description: Unable to save game
     
   /ludo/{gameID}/players:  
     parameters:
       - $ref: '#/components/parameters/gameIDParameter'
     post:
-      description: Send information on how many players will play the game      
+      description: Create a new player with color
       responses:
         '200':
-          description: Successfully sent number of players
+          description: Successfully created/added a player
         '400':
-          description: Could not send number of players
-
-  /ludo/{gameID}/players/{playerID}:
-    parameters:
-        - $ref: '#/components/parameters/gameIDParameter'
-        - $ref: '#/components/parameters/playerIDParameter'
-    get:
-      description: Colors to chose from
-      responses:
-        '200':
-          description: Successfully returned colors to choose from
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: string
-    post: 
-      description: Player choose Color
-      parameters:
-        - name: color
-          in: query
-          description: Allow player to choose color
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Color selected successfully
-          
+          description: Could not create/add a player
+            
   /ludo/{gameID}/players/{playerID}/dice:
     get:
-      description: Throw the dice
+      description: Throw the dice and receive the value
       parameters:
         - $ref: '#/components/parameters/gameIDParameter'
         - $ref: '#/components/parameters/playerIDParameter'
       responses:
         '200':
-          description: Dice throwed successifully 
+          description: Dice throwed and returned value successfully 
         '400':
-          description: Unable to throw the dice
-
-  /ludo/{gameID}/players/{playerID}/piece:
+          description: Unable to throw the dice and return value
+  /ludo/{gameID}/players/{playerID}/{pieceID}:
     post:
       description: Choose piece to move
       parameters:
-        - name: piece
-          in: query
-          description: Allow player to choose piece
-          schema:
-            type: integer
         - $ref: '#/components/parameters/gameIDParameter'
         - $ref: '#/components/parameters/playerIDParameter'
+        - $ref: '#/components/parameters/pieceIDParameter'
       responses:
         '200':
           description: Piece moved successfully
