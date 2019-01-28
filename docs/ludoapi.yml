@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: '1.0.0'
   title: 'LudoGame Api'
-  description: 'desc'
+  description: 'All about Ludo!'
 components:
   parameters:
     gameIDParameter:
@@ -18,7 +18,7 @@ components:
       schema:
         type: integer
     pieceIDParameter:
-      name: pieceIDParameter
+      name: pieceID
       in: path
       required: true
       schema:
@@ -108,7 +108,7 @@ paths:
           description: Dice throwed and returned value successfully 
         '400':
           description: Unable to throw the dice and return value
-  /ludo/{gameID}/players/{playerID}/{piece}:
+  /ludo/{gameID}/players/{playerID}/{pieceID}:
     post:
       description: Choose piece to move
       parameters:
