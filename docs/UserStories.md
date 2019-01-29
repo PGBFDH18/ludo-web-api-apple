@@ -75,7 +75,7 @@
 
 ## Tester i Postman
 <p>Samtliga våra resources och deras metoder enligt tablell ovan har testats i en collection i Postman. Denna collection delas av alla medlemmar i projektgruppen.</p>
-
+https://fantasticappleludo.postman.co/workspaces?type=personal</p>
 
 ## CI via Azure DevOps tillagt
 ## Lagring av databas
