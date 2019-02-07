@@ -36,7 +36,7 @@
 </tr>
 <tr>
 <td>/ludo/{gameId}</td>
-<td>Detaljeret information om spelet, vart alla pjäser står</td>
+<td>Detaljerad information om spelet, vart alla pjäser står</td>
 <td>Starta ett sparat spel</td>
 <td>N/A</td>
 <td>Ta bort ett sparat spel</td>
@@ -95,8 +95,9 @@ https://fantasticappleludo.postman.co/workspaces?type=personal</p>
 ## Lagring i databas
 <p>Vi skapade en SQL-databas med tabeller och joinade med foreign keys. När databasen skulle användas fick vi dock problem vid inläsning med datatypen Dynamic varför vi valde att spara datan i en Json-fil på användarens skrivbord istället. Databasen liksom metoderna för att spara och hämta speldata från den finns alltjämt kvar så vi har möjlighet att fixa till detta framöver.</p>
 
-## Minnes- och filhantering
+
 ![Logo](Filhantering.JPG)
+*Minnes- och filhantering*
 
 ## Förklaringar av speciella begrepp
 ### correctionFactor
