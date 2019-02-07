@@ -32,8 +32,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public void StartGame(int gameID)
         {
-            Game game = Game.GamesContainer.Load(gameID);
-            Game.LoadSaveService.Save(game);
+            var game = Game.LoadSaveService.Load(gameID);
         }
 
         // GET /ludo/{gameID}/save
