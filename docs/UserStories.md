@@ -95,7 +95,7 @@ https://fantasticappleludo.postman.co/workspaces?type=personal</p>
 ## Lagring i databas
 <p>Vi skapade en SQL-databas med tabeller och joinade med foreign keys. När databasen skulle användas fick vi dock problem vid inläsning med datatypen Dynamic varför vi valde att spara datan i en Json-fil på användarens skrivbord istället. Databasen liksom metoderna för att spara och hämta speldata från den finns alltjämt kvar så vi har möjlighet att fixa till detta framöver.</p>
 
-<img src="Filhantering.jpg"
+<img src="https://github.com/PGBFDH18/ludo-web-api-apple/blob/master/docs/Filhantering.jpg"
      alt="Filhantering"
      style="float: left; margin-right: 10px;" />
 *Minnes- och filhantering*
