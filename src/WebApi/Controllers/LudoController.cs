@@ -33,6 +33,8 @@ namespace WebApi.Controllers
         public void StartGame(int gameID)
         {
             var game = Game.LoadSaveService.Load(gameID);
+            game.GameState = GameState.Started;
+            Game.LoadSaveService.Update(game);
         }
 
         // GET /ludo/{gameID}/save
