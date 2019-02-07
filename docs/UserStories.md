@@ -75,7 +75,7 @@
 
 ## Instruktioner för att komma igång med ett spel:
 1. POST: /ludo
-	* en sträng skickas med i requestbodyn som namnger spelet, först spelet får alltid ID 0.
+	* en sträng skickas med i requestbodyn som namnger spelet, **första spelet får alltid ID 0.**
 2. POST: /ludo/{gameID}/players
 	* en siffra i intervallet 0-3 (enum) anges i requestbodyn som skapar en spelare med färg.
 3. GET: /ludo/{gameID}/save
