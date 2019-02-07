@@ -18,11 +18,10 @@ namespace WebApi
             string source = 
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "saved_games.json");
 
-            FileStream stream = null;
             // Om filen inte existerar, skapa den.
             if (!File.Exists(source))
             {
-                stream = File.Create(source);
+                FileStream stream = File.Create(source);
                 stream.Close();
             }
             GameEngine.Game.LoadSaveService = new GameEngine.Drive(source);
