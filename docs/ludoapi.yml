@@ -40,6 +40,12 @@ paths:
           description: No games found    
     post:
       description: Create a new game
+      requestBody:
+        description: Name of the game
+        content:
+          application/json:
+            schema:
+              type: string
       responses:
         '200':
           description: Successfully created a new game
@@ -91,6 +97,12 @@ paths:
       - $ref: '#/components/parameters/gameIDParameter'
     post:
       description: Create a new player with color
+      requestBody:
+        description: Enter a number (0-3) to select a color
+        content:
+          application/json:
+            schema:
+              type: integer
       responses:
         '200':
           description: Successfully created/added a player

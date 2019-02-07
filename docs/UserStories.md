@@ -73,6 +73,20 @@
 </table>
 </p>
 
+## Instruktioner för att komma igång med ett spel:
+1. POST: /ludo
+	* en sträng skickas med i requestbodyn som namnger spelet, först spelet får alltid ID 0.
+2. POST: /ludo/{gameID}/players
+	* en siffra i intervallet 0-3 (enum) anges i requestbodyn som skapar en spelare med färg.
+3. GET: /ludo/{gameID}/save
+	* sparar spelet.
+4. POST: /ludo/{gameID}
+	* starta sparat spel med gameID.
+5. GET: /ludo/{gameID}/players/{playerID}/dice
+	* slår tärningen för given spelare. Spelare anges inom intervallet 1 - 4.
+6. POST: /ludo/{gameID}/players/{playerID}/{pieceID}
+	* flyttar pjäsen, anges inom intervallet 1 - 4.
+
 ## Tester i Postman
 <p>Samtliga våra resources och deras metoder enligt tablell ovan har testats i en collection i Postman. Denna collection delas av alla medlemmar i projektgruppen.</p>
 https://fantasticappleludo.postman.co/workspaces?type=personal</p>
