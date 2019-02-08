@@ -14,6 +14,7 @@
 - Den spelare som först får alla sina pjäser i mål har vunnit spelet.
 - Som användare ska jag kunna spara ett spel till en fil och återuppta det genom inläsning av filen.
 
+
 ## api-interface
 <p>Resources och hur olika metoder påverkar dem</p>
 <table>
@@ -85,7 +86,7 @@
 5. GET: /ludo/{gameID}/players/{playerID}/dice
 	* slår tärningen för given spelare. Spelare anges inom intervallet 1 - 4.
 6. POST: /ludo/{gameID}/players/{playerID}/{pieceID}
-	* flyttar pjäsen, anges inom intervallet 1 - 4.
+	* flyttar pjäsen, anges inom intervallet  1 - 4.
 
 ## Tester i Postman
 <p>Samtliga våra resources och deras metoder enligt tablell ovan har testats i en collection i Postman. Denna collection delas av alla medlemmar i projektgruppen.</p>
