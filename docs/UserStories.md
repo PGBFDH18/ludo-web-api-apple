@@ -105,6 +105,14 @@ https://fantasticappleludo.postman.co/workspaces?type=personal</p>
 - Varje pjäs har en "lokal" position (antal steg som pjäsen har gått) och en "global" position (vilken ruta på brädan pjäsen står på). De första fyra pjäserna som skapas för en spelare får correctionFactor = 0. Därefter ökas värdet med 10 för varje fjärde pjäs (0, 10, 20, 30). Om vi antar att en pjäs har correctionFactor = 20 och den har gått 16 steg kan vi räkna ut den absoluta positionen (var på brädan den är) genom att ta position + correctionFactor = 20 + 16 = 36. Den befinner sig alltså på ruta 36. Genom att räkna ut den absoluta/globala positionen kan vi jämföra två pjäser med varandra för att avgöra om de står på samma ruta.
 Sammanfattat är correctionFactor en "konstant" som adderas med pjäsens lokala position för att få fram dess globala position.
 
+### GamesContainer
+
+- I den här klassen lagras "ofullständiga" Game-instanser tillfälligt i väntan på att skrivas till en fil.
+
+### Drive
+
+- Skriver Game-instanser till en fil i JSON-format. Så fort instansen skrivs till filen, kommer den att tas bort från minnet.
+
 ## ToDo's
 - [x] Sätta upp och organisera SQL-database in *Gearhost* <br>
 - [x] Upprätta YAML-fil i *VisualStudio* Code alt. *SwaggerHub*
