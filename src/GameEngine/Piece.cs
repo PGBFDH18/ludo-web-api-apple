@@ -25,7 +25,7 @@ namespace GameEngine
         {
             Color = color;
             Number = number;
-            this.Position = position;
+            Position = position;
             CorrectionFactor = correctionFactor;
         }
 
@@ -47,11 +47,6 @@ namespace GameEngine
         }
 
         public void Home() => Position = 0;
-
-
-        // Ersatts av instansvariabeln. Överge?
-        public static bool IsOnOpponentPosition(Piece myPiece, Piece opponentPiece) =>
-            myPiece.GetAbsolutePosition() == opponentPiece.GetAbsolutePosition() && opponentPiece != myPiece;
 
         // Metod som avgör om spelarens pjäs har samma position som motståndarens position med hänsyn till korrigeringsfaktorn.
         public bool IsOnOpponentPosition(Piece opponentPiece) =>

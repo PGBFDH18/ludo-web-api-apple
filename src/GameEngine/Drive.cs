@@ -6,9 +6,7 @@ using System.IO;
 using System.Linq;
 
 namespace GameEngine
-{
-    // Observera! Övriga felhanteringar ska ske utanför klassen.
-
+{ 
     /// <summary>
     /// Store game state on local drive.
     /// </summary>
@@ -54,7 +52,6 @@ namespace GameEngine
             }
             catch (JsonSerializationException)
             {
-                // Obs! List med bara ETT spel.
                 var game = new List<Game>(1)
                 {
                     // JSON-array genereras från List.
@@ -67,7 +64,6 @@ namespace GameEngine
         public List<Game> Load()
         {
             string json = File.ReadAllText(Source);
-            // TODO: Ska en lista med ett enda objekt returneras?
             try
             {
                 // Returnera en List med spel.
@@ -76,7 +72,6 @@ namespace GameEngine
             }
             catch (JsonSerializationException)
             {                
-                // Obs! List med bara ETT spel.
                 var game = new List<Game>(1)
                 {
                     // JSON-array genereras från List.
